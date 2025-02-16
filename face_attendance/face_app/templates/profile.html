@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Welcome, {{ user.username }}</h2>
+<p>Matric Number: {{ user.matric_number }}</p>
+{% if user.picture %}
+    <img src="{{ user.picture.url }}" width="150">
+{% else %}
+    <p>No profile picture</p>
+{% endif %}
+<a href="{% url 'mark_attendance' %}">Mark Attendance</a>
+<a href="{% url 'logout' %}">Logout</a>
+
+    
+</body>
+</html>

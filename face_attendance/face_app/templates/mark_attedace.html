@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mark Attendance</title>
+</head>
+<body>
+    <h2>Scan Face to Mark Attendance</h2>
+    <button onclick="markAttendance()">Scan Face</button>
+
+    <script>
+        function markAttendance() {
+            fetch("/attendance/mark/")
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>

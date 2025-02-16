@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse {
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex items-center justify-center">
+    <!-- Split Layout Container -->
+    <div class="flex flex-col md:flex-row w-full max-w-6xl bg-white rounded-xl shadow-lg overflow-hidden">
+        <!-- Left Side: Image -->
+        <div class="w-full md:w-1/2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+            <div class="h-full bg-black bg-opacity-50 flex items-center justify-center p-8">
+                <h1 class="text-4xl font-bold text-white text-center">Join Our Community</h1>
+            </div>
+        </div>
+
+        <!-- Right Side: Form -->
+        <div class="w-full md:w-1/2 p-8">
+            <h1 class="text-3xl font-bold text-slate-800 mb-6">Register</h1>
+
+            <!-- General Error Messages -->
+            {% if form.errors %}
+                <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+                    <p class="font-bold">❌ Please correct the following errors:</p>
+                    <ul class="list-disc list-inside">
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <form method="POST" enctype="multipart/form-data" class="space-y-4">
+                {% csrf_token %}
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700">Username:</label>
+                    {{ form.username }}
+                    <p class="text-sm text-red-500 mt-1">{{ form.username.errors }}</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700">Matric Number:</label>
+                    {{ form.matric_number }}
+                    <p class="text-sm text-red-500 mt-1">{{ form.matric_number.errors }}</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700">First Name:</label>
+                    {{ form.first_name }}
+                    <p class="text-sm text-red-500 mt-1">{{ form.first_name.errors }}</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700">Last Name:</label>
+                    {{ form.last_name }}
+                    <p class="text-sm text-red-500 mt-1">{{ form.last_name.errors }}</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700">Password:</label>
+                    {{ form.password1 }}
+                    <p class="text-sm text-red-500 mt-1">{{ form.password1.errors }}</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700">Confirm Password:</label>
+                    {{ form.password2 }}
+                    <p class="text-sm text-red-500 mt-1">{{ form.password2.errors }}</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700">Profile Picture:</label>
+                    {{ form.profile_picture }}
+                    <p class="text-sm text-red-500 mt-1">{{ form.profile_picture.errors }}</p>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-all duration-300">
+                    Sign Up
+                </button>
+            </form>
+
+            <p class="mt-6 text-center text-slate-600">
+                Already have an account? <a href="{% url 'login' %}" class="text-blue-500 hover:text-blue-600">Login here</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
